@@ -711,43 +711,44 @@ function showMainScreen() {
 }
 
 // ── HOME ──
-async function loadHomeRooms() {
+let homeUnsub = null;
+function loadHomeRooms() {
+  if (homeUnsub) homeUnsub();
   const q=query(collection(db,'rooms'),where('public','==',true),limit(20));
-  const snap=await getDocs(q);
-  const rooms=[];
-  snap.forEach(d=>rooms.push({id:d.id,...d.data()}));
+  homeUnsub=onSnapshot(q,snap=>{
+    const rooms=[];
+    snap.forEach(d=>rooms.push({id:d.id,...d.data()}));
+    const colors=['#7c6af7','#4fd18b','#f0a050','#f76a6a','#4ab8f7'];
 
-  // featured (top 5)
-  const feat=$('featured-rooms'); feat.innerHTML='';
-  const colors=['#7c6af7','#4fd18b','#f0a050','#f76a6a','#4ab8f7'];
-  rooms.slice(0,5).forEach((r,i)=>{
-    const el=document.createElement('div');
-    el.className='featured-card';
-    el.onclick=()=>joinOrOpenRoom(r);
-    el.innerHTML=`<div class="featured-icon" style="background:${colors[i%colors.length]}22;color:${colors[i%colors.length]}">#</div>
-      <div class="featured-name">${r.name}</div>
-      <div class="featured-desc">${r.description||'공개 채팅방'}</div>
-      <div class="featured-members">${r.memberCount||1}명 참여중</div>`;
-    feat.appendChild(el);
-  });
-  if(!rooms.length) feat.innerHTML='<div style="color:var(--text3);font-size:13px;padding:10px">아직 공개 채팅방이 없어요</div>';
+    const feat=$('featured-rooms'); feat.innerHTML='';
+    rooms.slice(0,5).forEach((r,i)=>{
+      const el=document.createElement('div');
+      el.className='featured-card';
+      el.onclick=()=>joinOrOpenRoom(r);
+      el.innerHTML=`<div class="featured-icon" style="background:${colors[i%colors.length]}22;color:${colors[i%colors.length]}">#</div>
+        <div class="featured-name">${r.name}</div>
+        <div class="featured-desc">${r.description||'공개 채팅방'}</div>
+        <div class="featured-members">${r.memberCount||1}명 참여중</div>`;
+      feat.appendChild(el);
+    });
+    if(!rooms.length) feat.innerHTML='<div style="color:var(--text3);font-size:13px;padding:10px">아직 공개 채팅방이 없어요</div>';
 
-  // public list
-  const list=$('public-rooms-list'); list.innerHTML='';
-  rooms.forEach((r,i)=>{
-    const el=document.createElement('div');
-    el.className='pop-item';
-    el.onclick=()=>joinOrOpenRoom(r);
-    const col=colors[i%colors.length];
-    el.innerHTML=`<div class="pop-avatar" style="background:${col}22;color:${col}">#</div>
-      <div class="pop-info">
-        <div class="pop-name">${r.name}</div>
-        <div class="pop-desc">${r.description||'공개 채팅방'}</div>
-      </div>
-      <span class="pop-badge badge-public">공개</span>`;
-    list.appendChild(el);
+    const list=$('public-rooms-list'); list.innerHTML='';
+    rooms.forEach((r,i)=>{
+      const el=document.createElement('div');
+      el.className='pop-item';
+      el.onclick=()=>joinOrOpenRoom(r);
+      const col=colors[i%colors.length];
+      el.innerHTML=`<div class="pop-avatar" style="background:${col}22;color:${col}">#</div>
+        <div class="pop-info">
+          <div class="pop-name">${r.name}</div>
+          <div class="pop-desc">${r.description||'공개 채팅방'}</div>
+        </div>
+        <span class="pop-badge badge-public">공개</span>`;
+      list.appendChild(el);
+    });
+    if(!rooms.length) list.innerHTML='<div style="color:var(--text3);font-size:13px;padding:16px;text-align:center">공개 채팅방이 없어요</div>';
   });
-  if(!rooms.length) list.innerHTML='<div style="color:var(--text3);font-size:13px;padding:16px;text-align:center">공개 채팅방이 없어요</div>';
 }
 
 async function joinOrOpenRoom(r) {
