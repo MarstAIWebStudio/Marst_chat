@@ -267,6 +267,52 @@ button{cursor:pointer;}
 .empty-state svg{width:48px;height:48px;opacity:.3;margin-bottom:6px;fill:none;stroke:currentColor;stroke-width:1;}
 .empty-state h3{font-size:16px;font-weight:500;color:var(--text2);}
 .empty-state p{font-size:13px;text-align:center;line-height:1.5;}
+
+/* ── CALL UI ── */
+#call-screen {
+  position:fixed;inset:0;z-index:150;
+  background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:space-between;
+  padding:60px 20px 50px;
+}
+#call-screen.open{display:flex;}
+.call-type-badge{font-size:12px;font-weight:600;color:var(--accent2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;}
+.call-avatar{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:600;margin-bottom:16px;overflow:hidden;border:3px solid var(--accent);}
+.call-avatar img{width:100%;height:100%;object-fit:cover;}
+.call-name{font-size:24px;font-weight:600;margin-bottom:8px;}
+.call-status{font-size:14px;color:var(--text3);}
+.call-timer{font-size:20px;font-weight:500;color:var(--text2);font-family:'DM Mono',monospace;margin-top:6px;}
+/* video */
+#call-videos{width:100%;flex:1;display:none;position:relative;margin:16px 0;border-radius:16px;overflow:hidden;background:#000;max-height:300px;}
+#call-videos.show{display:block;}
+#remote-video{width:100%;height:100%;object-fit:cover;}
+#local-video{position:absolute;bottom:10px;right:10px;width:90px;height:120px;border-radius:10px;object-fit:cover;border:2px solid var(--accent);}
+/* controls */
+.call-controls{display:flex;gap:20px;align-items:center;justify-content:center;}
+.call-ctrl-btn{width:60px;height:60px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.call-ctrl-btn svg{width:24px;height:24px;stroke-width:1.8;fill:none;stroke:currentColor;}
+.ctrl-mute{background:var(--bg3);color:var(--text);}
+.ctrl-mute.active{background:var(--danger);color:#fff;}
+.ctrl-cam{background:var(--bg3);color:var(--text);}
+.ctrl-cam.active{background:var(--danger);color:#fff;}
+.ctrl-speaker{background:var(--bg3);color:var(--text);}
+.ctrl-speaker.active{background:var(--accent);color:#fff;}
+.ctrl-end{width:68px;height:68px;background:var(--danger);color:#fff;}
+/* incoming call */
+#incoming-call{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:20px;padding:16px 20px;z-index:160;
+  display:none;flex-direction:column;align-items:center;gap:10px;
+  min-width:280px;box-shadow:0 8px 32px rgba(0,0,0,.4);
+}
+#incoming-call.open{display:flex;}
+.incoming-title{font-size:12px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+.incoming-name{font-size:18px;font-weight:600;}
+.incoming-type{font-size:13px;color:var(--accent2);}
+.incoming-btns{display:flex;gap:16px;margin-top:4px;}
+.incoming-accept{width:56px;height:56px;border-radius:50%;background:var(--success);border:none;color:#fff;display:flex;align-items:center;justify-content:center;}
+.incoming-reject{width:56px;height:56px;border-radius:50%;background:var(--danger);border:none;color:#fff;display:flex;align-items:center;justify-content:center;}
+.incoming-accept svg,.incoming-reject svg{width:24px;height:24px;stroke-width:2;fill:none;stroke:currentColor;}
 </style>
 </head>
 <body>
@@ -478,6 +524,12 @@ button{cursor:pointer;}
       <div class="chat-detail-sub" id="detail-sub">—</div>
     </div>
     <div class="hdr-actions">
+      <button class="icon-btn" id="call-voice-btn" onclick="startCall('voice')" title="음성통화">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      </button>
+      <button class="icon-btn" id="call-video-btn" onclick="startCall('video')" title="영상통화">
+        <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+      </button>
       <button class="icon-btn" id="detail-invite-btn" onclick="showInviteCode()">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -638,8 +690,8 @@ let searchMode = 'rooms';
 let attachedFile = null, attachedPreviewUrl = null;
 
 const THEMES = [
-  { id:'dark',   label:'다크',   color:'#7c6af7', bg:'#0e0e12' },
-  { id:'light',  label:'라이트', color:'#6a58e8', bg:'#f5f5f7' },
+  { id:'dark',   label:'다크',   color:'#0e0e12', bg:'#0e0e12' },
+  { id:'light',  label:'라이트', color:'#f5f5f7', bg:'#f5f5f7' },
   { id:'purple', label:'퍼플',   color:'#a855f7', bg:'#0d0a1a' },
   { id:'green',  label:'그린',   color:'#10b981', bg:'#080f0e' },
   { id:'rose',   label:'로즈',   color:'#f43f5e', bg:'#120a0e' },
@@ -766,7 +818,7 @@ function showMainScreen() {
   $('main-screen').classList.add('active');
   $('home-username').textContent=currentUserData.name;
   navTo('home');
-  loadRooms(); loadDMs();
+  loadRooms(); loadDMs(); startCallListener();
 }
 
 // ── NAVIGATION ──
@@ -1168,10 +1220,303 @@ window.switchChatTab = function(tab) {
   $('ct-dms').classList.toggle('active',tab==='dms');
 };
 
+
+// ══════════════════════════════════════════
+// ── WebRTC CALL ENGINE ──
+// ══════════════════════════════════════════
+import { deleteDoc, onSnapshot as onSnap2 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const ICE_SERVERS = {iceServers:[{urls:['stun:stun1.l.google.com:19302','stun:stun2.l.google.com:19302']}]};
+
+let pc = null;            // RTCPeerConnection
+let localStream = null;
+let callDocId = null;
+let callUnsub = null;
+let callTimerInterval = null;
+let callSeconds = 0;
+let isCallInitiator = false;
+let currentCallType = 'voice';  // 'voice' | 'video'
+let isMuted = false, isCamOff = false, isSpeakerOn = true;
+let incomingCallData = null;
+let callListenerUnsub = null;
+
+// Listen for incoming calls whenever logged in
+function startCallListener() {
+  if(callListenerUnsub) callListenerUnsub();
+  const q = query(collection(db,'calls'), where('to','==',currentUser.uid), where('status','==','ringing'));
+  callListenerUnsub = onSnapshot(q, snap => {
+    snap.docChanges().forEach(ch => {
+      if(ch.type==='added' && !$('call-screen').classList.contains('open')) {
+        incomingCallData = {id:ch.doc.id, ...ch.doc.data()};
+        showIncomingCall(incomingCallData);
+      }
+    });
+  });
+}
+
+async function showIncomingCall(data) {
+  const callerSnap = await getDoc(doc(db,'users',data.from));
+  const caller = callerSnap.data()||{name:'알 수 없음',photoURL:''};
+  $('incoming-name').textContent = caller.name;
+  $('incoming-type').textContent = data.callType==='video'?'📹 영상 통화':'📞 음성 통화';
+  $('incoming-call').classList.add('open');
+}
+
+window.acceptCall = async function() {
+  if(!incomingCallData) return;
+  $('incoming-call').classList.remove('open');
+  const data = incomingCallData;
+  incomingCallData = null;
+  currentCallType = data.callType;
+  callDocId = data.id;
+  isCallInitiator = false;
+
+  const callerSnap = await getDoc(doc(db,'users',data.from));
+  const caller = callerSnap.data()||{name:'알 수 없음',photoURL:''};
+
+  await updateDoc(doc(db,'calls',callDocId),{status:'accepted'});
+  await openCallScreen(caller, data.callType);
+  await setupPeerConnection(false);
+
+  // set remote offer
+  const callDoc = await getDoc(doc(db,'calls',callDocId));
+  const offer = callDoc.data().offer;
+  await pc.setRemoteDescription(new RTCSessionDescription(offer));
+  const answer = await pc.createAnswer();
+  await pc.setLocalDescription(answer);
+  await updateDoc(doc(db,'calls',callDocId),{answer:{type:answer.type,sdp:answer.sdp}});
+
+  // listen for remote ice
+  listenRemoteIce('callerIce');
+};
+
+window.rejectCall = async function() {
+  if(!incomingCallData) return;
+  await updateDoc(doc(db,'calls',incomingCallData.id),{status:'rejected'});
+  incomingCallData = null;
+  $('incoming-call').classList.remove('open');
+};
+
+window.startCall = async function(type) {
+  if(!currentChatId) return;
+  currentCallType = type;
+  isCallInitiator = true;
+
+  // figure out peer
+  let peerId, peerData;
+  if(currentChatType==='dm') {
+    // get other member
+    const dmSnap = await getDoc(doc(db,'dms',currentChatId));
+    peerId = dmSnap.data().members.find(m=>m!==currentUser.uid);
+  } else {
+    // for rooms just broadcast — pick first other member
+    const roomSnap = await getDoc(doc(db,'rooms',currentChatId));
+    const members = roomSnap.data().members.filter(m=>m!==currentUser.uid);
+    if(!members.length){toast('방에 다른 멤버가 없어요');return;}
+    peerId = members[0];
+  }
+  const peerSnap = await getDoc(doc(db,'users',peerId));
+  peerData = peerSnap.data()||{name:'알 수 없음',photoURL:''};
+
+  await openCallScreen(peerData, type);
+  await setupPeerConnection(true);
+
+  // create call doc
+  const callRef = await addDoc(collection(db,'calls'),{
+    from: currentUser.uid,
+    to: peerId,
+    callType: type,
+    status: 'ringing',
+    chatId: currentChatId,
+    createdAt: serverTimestamp()
+  });
+  callDocId = callRef.id;
+
+  // create offer
+  const offer = await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  await updateDoc(doc(db,'calls',callDocId),{offer:{type:offer.type,sdp:offer.sdp}});
+
+  // listen for answer
+  callUnsub = onSnapshot(doc(db,'calls',callDocId), async snap => {
+    const data = snap.data();
+    if(!data) return;
+    if(data.answer && pc.signalingState==='have-local-offer') {
+      await pc.setRemoteDescription(new RTCSessionDescription(data.answer));
+      startCallTimer();
+      $('call-status').textContent = '연결됨';
+    }
+    if(data.status==='rejected'){toast('상대방이 거절했습니다');endCall();}
+    if(data.status==='ended' && !isCallInitiator) endCall();
+  });
+
+  listenRemoteIce('calleeIce');
+};
+
+async function setupPeerConnection(isInitiator) {
+  pc = new RTCPeerConnection(ICE_SERVERS);
+  // get media
+  try {
+    localStream = await navigator.mediaDevices.getUserMedia({
+      audio:true,
+      video: currentCallType==='video'
+    });
+  } catch(e) {
+    toast('마이크/카메라 권한을 허용해주세요'); closeCallScreen(); return;
+  }
+  localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
+
+  if(currentCallType==='video') {
+    $('local-video').srcObject = localStream;
+  }
+
+  // remote track
+  pc.ontrack = e => {
+    if(currentCallType==='video') {
+      $('remote-video').srcObject = e.streams[0];
+    } else {
+      const audio = new Audio();
+      audio.srcObject = e.streams[0];
+      audio.play();
+    }
+    startCallTimer();
+    $('call-status').textContent = '연결됨';
+  };
+
+  // ICE
+  const iceCol = isInitiator ? 'callerIce' : 'calleeIce';
+  pc.onicecandidate = async e => {
+    if(e.candidate && callDocId) {
+      await addDoc(collection(db,'calls',callDocId,iceCol),e.candidate.toJSON());
+    }
+  };
+}
+
+function listenRemoteIce(col) {
+  if(!callDocId) return;
+  const q = collection(db,'calls',callDocId,col);
+  onSnapshot(q, snap => {
+    snap.docChanges().forEach(ch => {
+      if(ch.type==='added' && pc) {
+        pc.addIceCandidate(new RTCIceCandidate(ch.doc.data())).catch(()=>{});
+      }
+    });
+  });
+}
+
+async function openCallScreen(peer, type) {
+  const col = avatarColor(peer.name);
+  const av = $('call-avatar');
+  av.style.background = peer.photoURL ? 'transparent' : col;
+  av.innerHTML = peer.photoURL ? `<img src="${peer.photoURL}" alt="">` : initials(peer.name);
+  $('call-peer-name').textContent = peer.name;
+  $('call-type-label').textContent = type==='video' ? '📹 영상 통화' : '📞 음성 통화';
+  $('call-status').textContent = '연결 중...';
+  $('call-timer').style.display='none';
+  $('ctrl-cam').style.display = type==='video' ? '' : 'none';
+  $('call-videos').classList.toggle('show', type==='video');
+  $('call-screen').classList.add('open');
+  isMuted=false; isCamOff=false;
+  $('ctrl-mute').classList.remove('active');
+  $('ctrl-cam').classList.remove('active');
+}
+
+function closeCallScreen() {
+  $('call-screen').classList.remove('open');
+  if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null;}
+  if(pc){pc.close();pc=null;}
+  if(callUnsub){callUnsub();callUnsub=null;}
+  if(callTimerInterval){clearInterval(callTimerInterval);callTimerInterval=null;}
+  callSeconds=0; callDocId=null;
+}
+
+function startCallTimer() {
+  if(callTimerInterval) return;
+  callSeconds=0;
+  $('call-timer').style.display='';
+  callTimerInterval = setInterval(()=>{
+    callSeconds++;
+    const m=String(Math.floor(callSeconds/60)).padStart(2,'0');
+    const s=String(callSeconds%60).padStart(2,'0');
+    $('call-timer').textContent=`${m}:${s}`;
+  },1000);
+}
+
+window.endCall = async function() {
+  if(callDocId){
+    try{ await updateDoc(doc(db,'calls',callDocId),{status:'ended'}); }catch(e){}
+  }
+  closeCallScreen();
+};
+
+window.toggleMute = function() {
+  isMuted=!isMuted;
+  if(localStream) localStream.getAudioTracks().forEach(t=>t.enabled=!isMuted);
+  $('ctrl-mute').classList.toggle('active',isMuted);
+  toast(isMuted?'마이크 꺼짐':'마이크 켜짐');
+};
+window.toggleCam = function() {
+  isCamOff=!isCamOff;
+  if(localStream) localStream.getVideoTracks().forEach(t=>t.enabled=!isCamOff);
+  $('ctrl-cam').classList.toggle('active',isCamOff);
+  toast(isCamOff?'카메라 꺼짐':'카메라 켜짐');
+};
+window.toggleSpeaker = function() {
+  isSpeakerOn=!isSpeakerOn;
+  $('ctrl-speaker').classList.toggle('active',isSpeakerOn);
+  const rv=$('remote-video');
+  if(rv.srcObject) rv.muted=!isSpeakerOn;
+  toast(isSpeakerOn?'스피커 켜짐':'스피커 꺼짐');
+};
+
 // ── MODALS ──
 window.openModal = id => document.getElementById(id).classList.add('open');
 window.closeModal = id => document.getElementById(id).classList.remove('open');
 document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 </script>
+
+<!-- CALL SCREEN -->
+<div id="call-screen">
+  <div style="display:flex;flex-direction:column;align-items:center;">
+    <div class="call-type-badge" id="call-type-label">음성 통화</div>
+    <div class="call-avatar" id="call-avatar">?</div>
+    <div class="call-name" id="call-peer-name">—</div>
+    <div class="call-status" id="call-status">연결 중...</div>
+    <div class="call-timer" id="call-timer" style="display:none">00:00</div>
+  </div>
+  <div id="call-videos">
+    <video id="remote-video" autoplay playsinline></video>
+    <video id="local-video" autoplay playsinline muted></video>
+  </div>
+  <div class="call-controls">
+    <button class="call-ctrl-btn ctrl-mute" id="ctrl-mute" onclick="toggleMute()" title="마이크">
+      <svg id="mute-icon" viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>
+    </button>
+    <button class="call-ctrl-btn ctrl-cam" id="ctrl-cam" onclick="toggleCam()" title="카메라" style="display:none">
+      <svg id="cam-icon" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+    </button>
+    <button class="call-ctrl-btn ctrl-speaker ctrl-speaker" id="ctrl-speaker" onclick="toggleSpeaker()" title="스피커">
+      <svg id="speaker-icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+    </button>
+    <button class="call-ctrl-btn ctrl-end" onclick="endCall()" title="통화 종료">
+      <svg viewBox="0 0 24 24"><path d="M10.68 13.31a16 16 0 003.41 2.6l1.27-1.27a2 2 0 012.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0122 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.42 19.42 0 01-3.44-3.07M2 2l20 20" stroke="#fff"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- INCOMING CALL -->
+<div id="incoming-call">
+  <div class="incoming-title">수신 전화</div>
+  <div class="incoming-name" id="incoming-name">—</div>
+  <div class="incoming-type" id="incoming-type">음성 통화</div>
+  <div class="incoming-btns">
+    <button class="incoming-reject" onclick="rejectCall()">
+      <svg viewBox="0 0 24 24"><path d="M10.68 13.31a16 16 0 003.41 2.6l1.27-1.27a2 2 0 012.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0122 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.42 19.42 0 01-3.44-3.07M2 2l20 20"/></svg>
+    </button>
+    <button class="incoming-accept" onclick="acceptCall()">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    </button>
+  </div>
+</div>
 </body>
 </html>
