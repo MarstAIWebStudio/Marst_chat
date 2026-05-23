@@ -884,9 +884,28 @@ const THEMES=[
 const $=id=>document.getElementById(id);
 function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 function inits(n){return(n||'?').slice(0,2).toUpperCase();}
+function getCountryCode(){
+  // map common locales to codes
+  const map={'ko':17,'ja':18,'en-US':1,'en-GB':44,'zh':86,'fr':33,'de':49,'es':34,'pt':55,'ru':7,'ar':966,'hi':91,'id':62,'vi':84,'th':66,'ms':60};
+  const lang=navigator.language||'en';
+  const base=lang.split('-')[0];
+  return String(map[lang]||map[base]||17).padStart(2,'0');
+}
+function fmtPhone(ud){
+  if(!ud)return'—';
+  const cc=ud.countryCode||'17';
+  const tier=ud.tier||'01';
+  const rand=ud.phoneRand5||'X-XXXX';
+  const end=ud.phoneNumEnd||'???';
+  return `+${cc} ${tier} ${rand}-${end}`;
+}
 function fmtTime(ts){if(!ts)return'';const d=ts.toDate?ts.toDate():new Date(ts);return d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});}
 function genCode(){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';return Array.from({length:6},()=>c[Math.floor(Math.random()*c.length)]).join('');}
-function genRand5(){return String(Math.floor(Math.random()*90000)+10000);}
+function genRand5(){
+  const d1=Math.floor(Math.random()*9)+1;
+  const d2=String(Math.floor(Math.random()*9000)+1000);
+  return d1+'-'+d2;
+}
 function escH(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 function aCol(name){const cols=['#7c6af7','#4fd18b','#f0a050','#f76a6a','#4ab8f7','#e06af7'];let h=0;for(let c of(name||''))h=(h*31+c.charCodeAt(0))%cols.length;return cols[h];}
 function id2email(id){return id.trim().toLowerCase()+'@marst.chat';}
@@ -930,7 +949,7 @@ window.doSignup=async function(){
   const err=$('auth-err');
   if(!uid||uid.length<3){err.textContent='아이디 3자 이상';return;}
   if(!name){err.textContent='닉네임 입력';return;}
-  if(!numEnd||numEnd.length!==4){err.textContent='끝 4자리 번호 입력';return;}
+  if(!numEnd||numEnd.length!==3){err.textContent='끝 3자리 번호 입력';return;}
   if(pw.length<6){err.textContent='비밀번호 6자 이상';return;}
   const email=id2email(uid);
   const tier='01'; // default general
@@ -1203,7 +1222,7 @@ function refreshProfile(){
     ?`<img src="${CUD.photoURL}" alt=""><div class="av-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`
     :`<span id="prof-av-txt">${inits(CUD.name)}</span><div class="av-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`;
   $('prof-name').textContent=CUD.name;
-  $('prof-num').textContent=`+${CUD.tier||'01'} ${CUD.phoneNum||'—'}`;
+  $('prof-num').textContent=fmtPhone(CUD);
   const t=TIER_INFO[CUD.tier||'01']||TIER_INFO['01'];
   $('prof-tier-display').innerHTML=`${tierBadgeHTML(CUD.tier||'01')} <span style="color:var(--text2);font-size:13px;margin-left:6px;">${t.label}</span><br><span style="font-family:'DM Mono',monospace;font-size:14px;color:var(--accent2);margin-top:6px;display:block;">+${CUD.tier||'01'} ${CUD.phoneNum||'—'}</span>`;
   // show admin section for tier 00 or 09
@@ -1694,7 +1713,7 @@ window.changePhoneNum = async function(){
   const numEnd = $('new-numend').value.trim();
   const err = $('chnum-err'), ok = $('chnum-ok');
   err.textContent=''; ok.textContent='';
-  if(!numEnd||numEnd.length!==4){err.textContent='끝 4자리 입력';return;}
+  if(!numEnd||numEnd.length!==3){err.textContent='끝 3자리 입력';return;}
   let rand5 = genRand5();
   const q2 = query(collection(db,'users'),where('phoneNumEnd','==',numEnd));
   const ex = await getDocs(q2);
@@ -2287,7 +2306,7 @@ document.querySelectorAll('.moverlay').forEach(o=>o.addEventListener('click',e=>
     </div>
     <div class="mf">
       <label>새 끝 4자리</label>
-      <input type="text" id="new-numend" maxlength="4" placeholder="예: 5678" oninput="this.value=this.value.replace(/\D/g,'');updateNumChangePreview()">
+      <input type="text" id="new-numend" maxlength="3" placeholder="예: 995" oninput="this.value=this.value.replace(/\D/g,'');updateNumChangePreview()">
       <div class="hint">중간 5자리는 자동으로 배정됩니다</div>
     </div>
     <div style="background:var(--bg3);border-radius:9px;padding:10px 14px;margin-bottom:4px;font-family:'DM Mono',monospace;font-size:13px;color:var(--text2);">
