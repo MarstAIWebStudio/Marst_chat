@@ -320,6 +320,91 @@ button{cursor:pointer;}
 .empty-st svg{width:44px;height:44px;opacity:.25;margin-bottom:5px;fill:none;stroke:currentColor;stroke-width:1;}
 .empty-st h3{font-size:15px;font-weight:500;color:var(--text2);}
 .empty-st p{font-size:12px;text-align:center;line-height:1.5;}
+
+/* ── REACTION ── */
+.reaction-bar{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;}
+.reaction-pill{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:20px;background:var(--bg4);border:1.5px solid var(--border);font-size:13px;cursor:pointer;transition:all .15s;user-select:none;}
+.reaction-pill:hover,.reaction-pill.mine{background:var(--accent);border-color:var(--accent);color:#fff;}
+.reaction-pill .cnt{font-size:11px;font-weight:600;}
+.reaction-picker{position:absolute;background:var(--bg2);border:1.5px solid var(--border2);border-radius:14px;padding:8px 10px;display:flex;gap:6px;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,.4);flex-wrap:wrap;max-width:220px;}
+.reaction-picker span{font-size:20px;cursor:pointer;transition:transform .1s;padding:2px;}
+.reaction-picker span:hover{transform:scale(1.3);}
+
+/* ── REPLY ── */
+.reply-preview{display:none;align-items:center;gap:8px;padding:7px 12px;background:var(--bg3);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;margin-bottom:7px;}
+.reply-preview.show{display:flex;}
+.reply-preview-text{flex:1;font-size:12px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.reply-preview-close{background:none;border:none;color:var(--text3);font-size:16px;cursor:pointer;}
+.bubble-reply{background:var(--bg4);border-left:3px solid var(--accent2);border-radius:6px;padding:5px 9px;margin-bottom:5px;font-size:11px;color:var(--text2);cursor:pointer;}
+.mrow.me .bubble-reply{border-left-color:rgba(255,255,255,.4);background:rgba(255,255,255,.1);}
+
+/* ── VOICE MESSAGE ── */
+.voice-bubble{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:16px;background:var(--bg3);border:1px solid var(--border);min-width:180px;}
+.mrow.me .voice-bubble{background:var(--accent);border-color:transparent;}
+.voice-play{width:32px;height:32px;border-radius:50%;background:var(--accent);border:none;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;}
+.mrow.me .voice-play{background:rgba(255,255,255,.25);}
+.voice-play svg{width:14px;height:14px;fill:currentColor;}
+.voice-wave{flex:1;height:28px;display:flex;align-items:center;gap:2px;}
+.voice-wave .bar{width:3px;border-radius:2px;background:var(--accent2);opacity:.6;}
+.mrow.me .voice-wave .bar{background:rgba(255,255,255,.7);}
+.voice-dur{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;flex-shrink:0;}
+.mrow.me .voice-dur{color:rgba(255,255,255,.7);}
+.rec-btn{width:38px;height:38px;border-radius:50%;background:var(--bg3);border:1.5px solid var(--border);color:var(--text2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+.rec-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;}
+.rec-btn.recording{background:var(--danger);border-color:var(--danger);color:#fff;animation:pulse-rec .8s infinite;}
+@keyframes pulse-rec{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.rec-timer{font-size:11px;color:var(--danger);font-family:'DM Mono',monospace;display:none;min-width:36px;}
+.rec-timer.show{display:block;}
+
+/* ── MENTION ── */
+.mention-popup{position:absolute;bottom:100%;left:0;right:0;background:var(--bg2);border:1.5px solid var(--border2);border-radius:12px 12px 0 0;max-height:160px;overflow-y:auto;display:none;z-index:40;}
+.mention-popup.show{display:block;}
+.mention-item{display:flex;align-items:center;gap:9px;padding:9px 14px;cursor:pointer;transition:background .12s;}
+.mention-item:hover{background:var(--bg3);}
+.mention-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
+.mention-name{font-size:13px;font-weight:500;}
+.mention-id{font-size:11px;color:var(--text3);}
+.mention-tag{color:var(--accent2);font-weight:600;}
+
+/* ── MSG CONTEXT MENU ── */
+.ctx-menu{position:fixed;background:var(--bg2);border:1.5px solid var(--border2);border-radius:12px;padding:6px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4);min-width:160px;display:none;}
+.ctx-menu.show{display:block;}
+.ctx-item{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;transition:background .12s;}
+.ctx-item:hover{background:var(--bg3);}
+.ctx-item svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;flex-shrink:0;}
+.ctx-item.danger{color:var(--danger);}
+
+/* ── NOTICE CHANNEL ── */
+.notice-banner{background:linear-gradient(135deg,var(--accent),#9d8fff);border-radius:10px;padding:10px 14px;margin:8px 14px;cursor:pointer;}
+.notice-banner-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.8;margin-bottom:3px;}
+.notice-banner-text{font-size:13px;font-weight:500;color:#fff;}
+
+/* ── EDIT MSG ── */
+.editing-indicator{font-size:10px;color:var(--accent2);margin-top:2px;display:none;}
+.editing-indicator.show{display:block;}
+.bubble.edited::after{content:' (수정됨)';font-size:10px;opacity:.6;}
+
+/* ── STICKER ── */
+.sticker-panel{display:none;padding:10px;background:var(--bg2);border-top:1.5px solid var(--border);}
+.sticker-panel.show{display:block;max-height:180px;overflow:hidden;}
+.sticker-btn{font-size:28px;cursor:pointer;padding:4px;border-radius:8px;transition:transform .1s;background:none;border:none;}
+.sticker-btn:hover{transform:scale(1.2);background:var(--bg3);}
+.att-sticker-btn{width:38px;height:38px;border-radius:50%;background:var(--bg3);border:1.5px solid var(--border);color:var(--text2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;transition:all .15s;}
+
+/* ── READ RECEIPT ── */
+.read-check{font-size:10px;color:var(--accent2);margin-top:1px;text-align:right;}
+
+/* ── TYPING INDICATOR ── */
+.typing-ind{display:none;align-items:center;gap:4px;padding:4px 14px 6px;}
+.typing-ind.show{display:flex;}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:var(--text3);animation:typing-bounce .8s infinite;}
+.typing-dot:nth-child(2){animation-delay:.15s;}
+.typing-dot:nth-child(3){animation-delay:.3s;}
+@keyframes typing-bounce{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-5px);}}
+.typing-name{font-size:11px;color:var(--text3);}
+
+/* ── INP AREA IMPROVED ── */
+.inp-toolbar{display:flex;align-items:center;gap:6px;padding:6px 11px 0;}
 </style>
 </head>
 <body>
@@ -511,18 +596,73 @@ button{cursor:pointer;}
               <div class="srow-t"><div class="srow-l">비밀번호 변경</div><div class="srow-s">새 비밀번호 설정</div></div>
               <div class="srow-arr"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
             </div>
+            <div class="srow" onclick="openModal('m-chnum')">
+              <div class="srow-ic" style="background:rgba(74,184,247,.12);color:#4ab8f7"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+              <div class="srow-t"><div class="srow-l">전화번호 변경</div><div class="srow-s">끝 4자리 직접 설정</div></div>
+              <div class="srow-arr"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+            </div>
           </div>
         </div>
 
         <!-- ADMIN PANEL (only for tier 00 / 09) -->
         <div class="sset" id="admin-section" style="display:none">
           <div class="sset-label">🛡 관리자 패널</div>
-          <div class="admin-panel" style="padding:0;">
+          <div style="display:flex;gap:6px;margin-bottom:10px;">
+            <button class="admin-tab-btn on" id="atab-users" onclick="switchAdminTab('users')" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid var(--border);background:var(--accent);color:#fff;font-size:12px;font-weight:600;">유저 관리</button>
+            <button class="admin-tab-btn" id="atab-nums" onclick="switchAdminTab('nums')" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text2);font-size:12px;font-weight:600;">번호 발급</button>
+            <button class="admin-tab-btn" id="atab-events" onclick="switchAdminTab('events')" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text2);font-size:12px;font-weight:600;">이벤트</button>
+          </div>
+
+          <!-- USERS TAB -->
+          <div id="admin-tab-users" class="admin-tab-content">
             <div class="admin-search">
               <input type="text" id="admin-search-inp" placeholder="아이디 또는 닉네임 검색...">
               <button onclick="adminSearch()">검색</button>
             </div>
             <div id="admin-result"></div>
+          </div>
+
+          <!-- PHONE NUMBERS TAB -->
+          <div id="admin-tab-nums" class="admin-tab-content" style="display:none">
+            <div class="scard" style="padding:14px;margin-bottom:10px;">
+              <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:10px;">새 특수 번호 발급</div>
+              <div class="auc-fields">
+                <div class="auc-field"><label>받을 유저 (아이디)</label><input type="text" id="admin-num-uid" placeholder="유저 아이디"></div>
+                <div class="auc-field"><label>티어</label>
+                  <select id="admin-num-tier"></select>
+                </div>
+              </div>
+              <div class="auc-fields" style="margin-top:8px;">
+                <div class="auc-field"><label>끝 4자리</label><input type="text" id="admin-num-end" maxlength="4" placeholder="1234" oninput="this.value=this.value.replace(/\D/g,'')"></div>
+                <div class="auc-field"><label>미리보기</label><div id="admin-num-preview" style="padding:7px 10px;background:var(--bg3);border-radius:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent2);">+?? XXXXX-????</div></div>
+              </div>
+              <button onclick="adminIssueNum()" style="width:100%;margin-top:10px;padding:9px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;">번호 발급</button>
+              <div style="font-size:11px;color:var(--danger);margin-top:6px;" id="admin-num-err"></div>
+            </div>
+          </div>
+
+          <!-- EVENTS TAB -->
+          <div id="admin-tab-events" class="admin-tab-content" style="display:none">
+            <div class="scard" style="padding:14px;margin-bottom:10px;">
+              <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:10px;">이벤트 만들기</div>
+              <div class="auc-field" style="margin-bottom:8px;"><label>이벤트 종목</label>
+                <select id="ev-tier-sel"></select>
+              </div>
+              <div class="auc-field" style="margin-bottom:8px;"><label>제목</label><input type="text" id="ev-title" placeholder="이벤트 제목"></div>
+              <div class="auc-field" style="margin-bottom:8px;"><label>설명</label><textarea id="ev-desc" placeholder="이벤트 설명..." style="width:100%;padding:8px 10px;background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-size:12px;outline:none;resize:none;min-height:70px;"></textarea></div>
+              <div class="auc-field" style="margin-bottom:10px;"><label>진행 방식</label><textarea id="ev-how" placeholder="어떻게 참여하나요? 조건은?" style="width:100%;padding:8px 10px;background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-size:12px;outline:none;resize:none;min-height:60px;"></textarea></div>
+              <div style="display:flex;gap:7px;">
+                <select id="ev-status" style="flex:1;padding:8px 10px;background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-size:12px;outline:none;">
+                  <option value="active">활성화</option>
+                  <option value="inactive">비활성화</option>
+                </select>
+                <button onclick="adminCreateEvent()" style="flex:2;padding:9px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;">이벤트 등록</button>
+              </div>
+              <div style="font-size:11px;color:var(--danger);margin-top:6px;" id="ev-err"></div>
+              <div style="font-size:11px;color:var(--success);margin-top:6px;" id="ev-ok"></div>
+            </div>
+            <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px;">등록된 이벤트</div>
+            <div id="ev-list"></div>
           </div>
         </div>
 
@@ -571,10 +711,23 @@ button{cursor:pointer;}
     <div class="phdr-actions">
       <button class="ibtn" id="cd-voice-btn" onclick="startCall('voice')" title="음성통화"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></button>
       <button class="ibtn" id="cd-video-btn" onclick="startCall('video')" title="영상통화"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></button>
+      <button class="ibtn" id="cd-notice-btn" onclick="openNoticeModal()" style="display:none" title="공지"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></button>
       <button class="ibtn" id="cd-invite-btn" onclick="showInviteCode()"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></button>
     </div>
   </div>
+  <!-- NOTICE BANNER -->
+  <div id="notice-banner" style="display:none" onclick="openNoticeModal()">
+    <div class="notice-banner">
+      <div class="notice-banner-label">📢 공지</div>
+      <div class="notice-banner-text" id="notice-text">—</div>
+    </div>
+  </div>
   <div class="msgs" id="msgs"></div>
+  <!-- TYPING INDICATOR -->
+  <div class="typing-ind" id="typing-ind">
+    <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+    <span class="typing-name" id="typing-name"></span>
+  </div>
   <div class="inp-area">
     <div class="inp-preview" id="inp-preview">
       <img id="inp-prev-img" src="" alt="">
@@ -1056,6 +1209,7 @@ function refreshProfile(){
   // show admin section for tier 00 or 09
   const isAdmin=CUD.tier==='00'||CUD.tier==='09';
   $('admin-section').style.display=isAdmin?'':'none';
+  if(isAdmin) populateAdminNumTier();
   renderThemeGrid(localStorage.getItem('mc_t')||'dark');
 }
 
@@ -1189,47 +1343,138 @@ window.openChat=function(id,type,name,inviteCode){
   $('cd-title').textContent=name;
   $('cd-sub').textContent=type==='room'?`초대 코드: ${inviteCode}`:'Direct Message';
   $('cd-invite-btn').style.display=type==='room'?'':'none';
+  $('cd-notice-btn').style.display=type==='room'?'':'none';
   if(inviteCode)$('invite-code').textContent=inviteCode;
   $('msgs').innerHTML='';
   $('chat-detail').classList.add('open');
-  removeAttach();
-  // start notif listener for this chat
+  removeAttach(); clearReply();
+  $('sticker-panel').classList.remove('show');
   listenForNewMsgs(id,type,name,inviteCode);
+  listenTyping();
+  listenNotice();
+  loadRoomMembers();
 
   const col=type==='room'?`rooms/${id}/messages`:`dms/${id}/messages`;
   const q=query(collection(db,col),orderBy('createdAt','asc'));
   msgUnsub=onSnapshot(q,snap=>{
     const c=$('msgs');
-    snap.docChanges().forEach(ch=>{if(ch.type==='added')renderMsg(c,ch.doc.data());});
+    snap.docChanges().forEach(async ch=>{
+      if(ch.type==='added'){
+        await renderMsg(c,ch.doc.data(),ch.doc.id);
+        markRead(ch.doc.id);
+      }
+      if(ch.type==='modified'){
+        const existing=document.querySelector(`[data-msgid="${ch.doc.id}"]`);
+        if(existing){existing.remove();}
+        await renderMsg(c,ch.doc.data(),ch.doc.id);
+      }
+    });
     c.scrollTop=c.scrollHeight;
   });
 };
 window.closeDetail=function(){
   $('chat-detail').classList.remove('open');
-  if(msgUnsub){msgUnsub();msgUnsub=null;}curChatId=null;removeAttach();
+  if(msgUnsub){msgUnsub();msgUnsub=null;}
+  if(typingUnsub){typingUnsub();typingUnsub=null;}
+  if(noticeUnsub2){noticeUnsub2();noticeUnsub2=null;}
+  deleteTyping();
+  curChatId=null;removeAttach();clearReply();
 };
 
-async function renderMsg(c,m){
-  const isMe=m.uid===CU.uid;
-  const col=aCol(m.name);
-  // fetch sender tier for badge
+async function renderMsg(c, m, msgId){
+  const isMe = m.uid===CU.uid;
+  const col = aCol(m.name);
   let senderTier='01';
   try{const ss=await getDoc(doc(db,'users',m.uid));if(ss.exists())senderTier=ss.data().tier||'01';}catch(e){}
-  const avH=m.photoURL?`<img src="${m.photoURL}" alt="">`:
-    `<span style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:${col}20;color:${col}">${inits(m.name)}</span>`;
+  const avH = m.photoURL
+    ?`<img src="${m.photoURL}" alt="">`
+    :`<span style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:${col}20;color:${col}">${inits(m.name)}</span>`;
+
+  // DELETED
+  if(m.deleted){
+    const div=document.createElement('div'); div.className='msg-grp'; div.dataset.msgid=msgId||'';
+    div.innerHTML=`<div class="mrow ${isMe?'me':''}">
+      <div class="mbody">
+        <div class="bubble" style="opacity:.4;font-style:italic;font-size:12px;">🚫 삭제된 메시지</div>
+      </div></div>`;
+    c.appendChild(div); return;
+  }
+
+  // REPLY QUOTE
+  let replyHTML='';
+  if(m.replyTo){
+    replyHTML=`<div class="bubble-reply" onclick="">💬 <b>${escH(m.replyTo.name)}</b>: ${escH((m.replyTo.text||'(이미지)').slice(0,60))}</div>`;
+  }
+
+  // CONTENT
   let content='';
-  if(m.imageURL)content=`<img class="bimg" src="${m.imageURL}" alt="" onclick="openIV('${m.imageURL}')">`;
-  if(m.text)content+=`<div class="bubble">${escH(m.text)}</div>`;
-  const div=document.createElement('div');div.className='msg-grp';
-  div.innerHTML=`<div class="mrow ${isMe?'me':''}">
+  if(m.sticker){
+    content=`<div style="font-size:44px;line-height:1.1;cursor:default;">${m.sticker}</div>`;
+  } else {
+    if(m.imageURL) content+=`<img class="bimg" src="${m.imageURL}" alt="" onclick="openIV('${m.imageURL}')">`;
+    if(m.voiceURL){
+      const dur = m.voiceDur||0;
+      const bars = Array.from({length:20},(_,i)=>`<div class="bar" style="height:${6+Math.random()*14}px"></div>`).join('');
+      const bid='vbtn-'+(msgId||Date.now());
+      content+=`<div class="voice-bubble">
+        <button class="voice-play" id="${bid}" onclick="playVoice('${m.voiceURL}','${bid}')">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+        <div class="voice-wave">${bars}</div>
+        <span class="voice-dur">${Math.floor(dur/60)}:${String(dur%60).padStart(2,'0')}</span>
+      </div>`;
+    }
+    if(m.text){
+      const txt = escH(m.text).replace(/@(\w+)/g,'<span class="mention-tag">@$1</span>');
+      content+=`<div class="bubble${m.edited?' edited':''}">${txt}</div>`;
+    }
+  }
+
+  // REACTIONS
+  let reactHTML='';
+  if(m.reactions && Object.keys(m.reactions).length){
+    reactHTML='<div class="reaction-bar">';
+    for(const [emoji, users] of Object.entries(m.reactions)){
+      if(!users||!users.length) continue;
+      const mine = users.includes(CU.uid);
+      reactHTML+=`<div class="reaction-pill${mine?' mine':''}" onclick="quickReact('${msgId||''}','${emoji}')">${emoji}<span class="cnt">${users.length}</span></div>`;
+    }
+    reactHTML+='</div>';
+  }
+
+  // READ (DM only)
+  let readHTML='';
+  if(isMe && curChatType==='dm' && m.readBy && m.readBy.length>1){
+    readHTML='<div class="read-check">읽음 ✓</div>';
+  }
+
+  const safeM = JSON.stringify({text:m.text||'',name:m.name,uid:m.uid,sticker:m.sticker||''}).replace(/"/g,'&quot;');
+  const div=document.createElement('div'); div.className='msg-grp'; div.dataset.msgid=msgId||'';
+  div.innerHTML=`<div class="mrow ${isMe?'me':''}" oncontextmenu="showCtxMenu(event,'${msgId||''}',JSON.parse(this.closest('.msg-grp').dataset.msg||'{}'),${isMe})" data-msgid="${msgId||''}">
     ${!isMe?`<div class="mav" style="background:${col}18" onclick='showPVById("${m.uid}")'>${avH}</div>`:''}
     <div class="mbody">
       ${!isMe?`<div class="msender">${m.name} ${tierBadgeHTML(senderTier)}</div>`:''}
-      ${content}
+      ${replyHTML}${content}
+      ${reactHTML}
+      ${readHTML}
       <div class="mts">${fmtTime(m.createdAt)}</div>
     </div></div>`;
+  div.dataset.msg = safeM;
+  // long press for mobile
+  let pressTimer;
+  div.addEventListener('touchstart',e=>{pressTimer=setTimeout(()=>{
+    const msgData={text:m.text||'',name:m.name,uid:m.uid,sticker:m.sticker||''};
+    showCtxMenu({clientX:e.touches[0].clientX,clientY:e.touches[0].clientY,preventDefault:()=>{},stopPropagation:()=>{}},msgId||'',msgData,isMe);
+  },500);},{passive:true});
+  div.addEventListener('touchend',()=>clearTimeout(pressTimer));
   c.appendChild(div);
 }
+
+window.quickReact = async function(msgId, emoji){
+  if(!msgId||!curChatId) return;
+  ctxMsgId = msgId;
+  await pickReaction(emoji);
+};
 
 window.showPVById=async function(uid){
   const snap=await getDoc(doc(db,'users',uid));if(snap.exists())showPV(snap.data());
@@ -1250,6 +1495,7 @@ window.sendMsg=async function(){
   const inp=$('msg-inp');const text=inp.value.trim();
   if(!text&&!attachFile)return;if(!curChatId)return;
   inp.value='';inp.style.height='';
+  deleteTyping();
   let imageURL='';
   if(attachFile){
     setUBar(5);const file=attachFile;removeAttach();
@@ -1258,8 +1504,16 @@ window.sendMsg=async function(){
     await new Promise((res,rej)=>{task.on('state_changed',s=>setUBar(5+85*(s.bytesTransferred/s.totalBytes)),rej,async()=>{imageURL=await getDownloadURL(task.snapshot.ref);setUBar(100);res();});});
   }
   const col=curChatType==='room'?`rooms/${curChatId}/messages`:`dms/${curChatId}/messages`;
-  await addDoc(collection(db,col),{text:text||'',uid:CU.uid,name:CUD.name,photoURL:CUD.photoURL||'',imageURL,createdAt:serverTimestamp()});
+  const msgData={
+    text:text||'', uid:CU.uid, name:CUD.name, photoURL:CUD.photoURL||'',
+    imageURL, sticker:'', reactions:{}, readBy:[CU.uid],
+    replyTo: replyTo ? {id:replyTo.id, name:replyTo.name, text:replyTo.text} : null,
+    createdAt:serverTimestamp()
+  };
+  await addDoc(collection(db,col),msgData);
   await updateDoc(doc(db,curChatType==='room'?'rooms':'dms',curChatId),{lastMsg:imageURL?'📷 이미지':text});
+  clearReply();
+  $('sticker-panel').classList.remove('show');
 };
 window.handleKey=function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}};
 window.autoResize=function(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,95)+'px';};
@@ -1337,9 +1591,9 @@ window.startCall=async function(type){
   await updateDoc(doc(db,'calls',callDocId),{offer:{type:offer.type,sdp:offer.sdp}});
   callUnsub2=onSnapshot(doc(db,'calls',callDocId),async snap=>{
     const d=snap.data();if(!d)return;
-    if(d.answer&&pc.signalingState==='have-local-offer'){await pc.setRemoteDescription(new RTCSessionDescription(d.answer));startCallTimer();$('call-st').textContent='연결됨';}
-    if(d.status==='rejected'){toast('상대방이 거절했습니다');endCall();}
-    if(d.status==='ended'&&!isInit)endCall();
+    if(d.answer&&pc&&pc.signalingState==='have-local-offer'){await pc.setRemoteDescription(new RTCSessionDescription(d.answer));startCallTimer();$('call-st').textContent='연결됨';}
+    if(d.status==='rejected'){toast('상대방이 거절했습니다');endCallAndDelete();}
+    if(d.status==='ended'){toast('통화가 종료됐습니다');const id=callDocId;closeCallUI();await deleteCallDoc(id);}
   });
   listenICE('calleeIce');
 };
@@ -1356,6 +1610,20 @@ async function setupPC(ini){
   };
   const iceCol=ini?'callerIce':'calleeIce';
   pc.onicecandidate=async e=>{if(e.candidate&&callDocId)await addDoc(collection(db,'calls',callDocId,iceCol),e.candidate.toJSON());};
+  // ── 상대방 연결 끊김 감지 ──
+  pc.onconnectionstatechange=()=>{
+    const s=pc.connectionState;
+    if(s==='disconnected'||s==='failed'||s==='closed'){
+      toast('상대방이 통화를 종료했습니다');
+      endCallAndDelete();
+    }
+  };
+  pc.oniceconnectionstatechange=()=>{
+    if(pc.iceConnectionState==='disconnected'||pc.iceConnectionState==='failed'){
+      toast('연결이 끊겼습니다');
+      endCallAndDelete();
+    }
+  };
 }
 function listenICE(col){
   if(!callDocId)return;
@@ -1385,18 +1653,692 @@ function startCallTimer(){
   if(callTimerIv)return;callSec=0;$('call-timer').style.display='';
   callTimerIv=setInterval(()=>{callSec++;const m=String(Math.floor(callSec/60)).padStart(2,'0'),s=String(callSec%60).padStart(2,'0');$('call-timer').textContent=`${m}:${s}`;},1000);
 }
-window.endCall=async function(){
-  if(callDocId)try{await updateDoc(doc(db,'calls',callDocId),{status:'ended'});}catch(e){}
+// delete call doc from Firestore completely
+async function deleteCallDoc(id){
+  if(!id)return;
+  try{
+    const {deleteDoc:dd}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+    // delete subcollections first (callerIce, calleeIce)
+    for(const sub of['callerIce','calleeIce']){
+      const subSnap=await getDocs(collection(db,'calls',id,sub));
+      for(const d of subSnap.docs) await dd(d.ref);
+    }
+    await dd(doc(db,'calls',id));
+  }catch(e){console.warn('call doc delete failed',e);}
+}
+
+async function endCallAndDelete(){
+  const id=callDocId;
   closeCallUI();
+  await deleteCallDoc(id);
+}
+
+window.endCall=async function(){
+  const id=callDocId;
+  closeCallUI();
+  await deleteCallDoc(id);
 };
 window.toggleMute=function(){muted=!muted;if(localStream)localStream.getAudioTracks().forEach(t=>t.enabled=!muted);$('cc-mute').classList.toggle('on',muted);toast(muted?'마이크 꺼짐':'마이크 켜짐');};
 window.toggleCam=function(){camOff=!camOff;if(localStream)localStream.getVideoTracks().forEach(t=>t.enabled=!camOff);$('cc-cam').classList.toggle('on',camOff);toast(camOff?'카메라 꺼짐':'카메라 켜짐');};
 window.toggleSpk=function(){spkOn=!spkOn;$('cc-spk').classList.toggle('on',spkOn);const rv=$('remote-video');if(rv.srcObject)rv.muted=!spkOn;toast(spkOn?'스피커 켜짐':'스피커 꺼짐');};
+
+
+// ── PHONE NUMBER CHANGE ──
+window.updateNumChangePreview = function(){
+  const end = $('new-numend').value || '????';
+  const tier = CUD ? (CUD.tier||'01') : '01';
+  $('new-num-preview').textContent = `+${tier} XXXXX-${end}`;
+};
+
+window.changePhoneNum = async function(){
+  const numEnd = $('new-numend').value.trim();
+  const err = $('chnum-err'), ok = $('chnum-ok');
+  err.textContent=''; ok.textContent='';
+  if(!numEnd||numEnd.length!==4){err.textContent='끝 4자리 입력';return;}
+  let rand5 = genRand5();
+  const q2 = query(collection(db,'users'),where('phoneNumEnd','==',numEnd));
+  const ex = await getDocs(q2);
+  const used = new Set();
+  ex.forEach(d=>{if(d.id!==CU.uid)used.add(d.data().phoneRand5);});
+  while(used.has(rand5)) rand5 = genRand5();
+  const phoneNum = `${rand5}-${numEnd}`;
+  await updateDoc(doc(db,'users',CU.uid),{phoneNum,phoneRand5:rand5,phoneNumEnd:numEnd});
+  CUD.phoneNum=phoneNum; CUD.phoneRand5=rand5; CUD.phoneNumEnd=numEnd;
+  ok.textContent='번호 변경 완료!'; toast('전화번호 변경됨!');
+  refreshProfile();
+};
+
+// open phone modal → show current number
+const origOpenModal = window.openModal;
+window.openModal = function(id){
+  if(id==='m-chnum' && CUD){
+    $('cur-num-display').textContent = `+${CUD.tier||'01'} ${CUD.phoneNum||'—'}`;
+    $('new-numend').value='';
+    $('new-num-preview').textContent=`+${CUD.tier||'01'} XXXXX-????`;
+    $('chnum-err').textContent=''; $('chnum-ok').textContent='';
+  }
+  document.getElementById(id).classList.add('open');
+};
+
+// ── ADMIN TABS ──
+window.switchAdminTab = function(tab){
+  ['users','nums','events'].forEach(t=>{
+    $(`admin-tab-${t}`).style.display = t===tab?'':'none';
+    const btn = $(`atab-${t}`);
+    if(btn){ btn.style.background = t===tab?'var(--accent)':'var(--bg3)'; btn.style.color = t===tab?'#fff':'var(--text2)'; }
+  });
+  if(tab==='events') loadEventList();
+  if(tab==='nums') populateAdminNumTier();
+};
+
+function populateAdminNumTier(){
+  const sel = $('admin-num-tier'); if(!sel) return;
+  sel.innerHTML = Object.keys(TIER_INFO).map(k=>`<option value="${k}">${TIER_INFO[k].icon||''} +${k} ${TIER_INFO[k].label}</option>`).join('');
+  // also populate event tier sel
+  const esel = $('ev-tier-sel'); if(!esel) return;
+  const EVENT_TIERS = ['10','11','12','15','25','50','99'];
+  esel.innerHTML = EVENT_TIERS.map(k=>`<option value="${k}">${TIER_INFO[k].icon||''} +${k} ${TIER_INFO[k].label}</option>`).join('');
+}
+
+window.adminIssueNum = async function(){
+  const userId = $('admin-num-uid').value.trim().toLowerCase();
+  const tier = $('admin-num-tier').value;
+  const numEnd = $('admin-num-end').value.trim();
+  const err = $('admin-num-err');
+  err.textContent='';
+  if(!userId||!numEnd||numEnd.length!==4){err.textContent='모든 항목 입력 (끝 4자리 숫자)';return;}
+  // find user by userId
+  const snap = await getDocs(query(collection(db,'users'),where('userId','==',userId)));
+  if(snap.empty){err.textContent='유저를 찾을 수 없음';return;}
+  const userDoc = snap.docs[0]; const uid = userDoc.id;
+  let rand5 = genRand5();
+  const q2 = query(collection(db,'users'),where('phoneNumEnd','==',numEnd));
+  const ex = await getDocs(q2);
+  const used = new Set(); ex.forEach(d=>{if(d.id!==uid)used.add(d.data().phoneRand5);});
+  while(used.has(rand5)) rand5 = genRand5();
+  const phoneNum = `${rand5}-${numEnd}`;
+  await updateDoc(doc(db,'users',uid),{tier,phoneNum,phoneRand5:rand5,phoneNumEnd:numEnd});
+  toast(`✅ +${tier} ${phoneNum} 발급 완료!`);
+  $('admin-num-uid').value=''; $('admin-num-end').value='';
+};
+
+// live preview for admin num issue
+document.addEventListener('input', function(e){
+  if(e.target.id==='admin-num-end'||e.target.id==='admin-num-tier'){
+    const tier = ($('admin-num-tier')||{}).value||'??';
+    const end = ($('admin-num-end')||{}).value||'????';
+    const prev = $('admin-num-preview');
+    if(prev) prev.textContent = `+${tier} XXXXX-${end}`;
+  }
+});
+
+// ── EVENTS ──
+window.adminCreateEvent = async function(){
+  const tier = $('ev-tier-sel').value;
+  const title = $('ev-title').value.trim();
+  const desc = $('ev-desc').value.trim();
+  const how = $('ev-how').value.trim();
+  const status = $('ev-status').value;
+  const err=$('ev-err'),ok=$('ev-ok'); err.textContent=''; ok.textContent='';
+  if(!title||!desc||!how){err.textContent='제목·설명·진행방식 모두 입력';return;}
+  const t = TIER_INFO[tier]||{};
+  await addDoc(collection(db,'events'),{
+    tier, title, desc, how, status,
+    icon: t.icon||'', label: t.label||'',
+    createdBy: CU.uid, createdAt: serverTimestamp()
+  });
+  ok.textContent='이벤트 등록 완료!'; toast('이벤트 등록!');
+  $('ev-title').value=''; $('ev-desc').value=''; $('ev-how').value='';
+  loadEventList();
+};
+
+async function loadEventList(){
+  const list = $('ev-list'); if(!list) return;
+  list.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px">불러오는 중...</div>';
+  const snap = await getDocs(query(collection(db,'events'),orderBy('createdAt','desc')));
+  list.innerHTML='';
+  if(snap.empty){list.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px">등록된 이벤트 없음</div>';return;}
+  snap.forEach(d=>{
+    const ev=d.data(); const t=TIER_INFO[ev.tier]||{};
+    const card=document.createElement('div');
+    card.style.cssText='background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;';
+    card.innerHTML=`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <div style="display:flex;align-items:center;gap:7px;">
+          <span style="font-size:16px;">${ev.icon||'🎯'}</span>
+          <div>
+            <div style="font-size:13px;font-weight:600;">${ev.title}</div>
+            <div style="font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;">+${ev.tier} ${t.label||''}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:5px;align-items:center;">
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;background:${ev.status==='active'?'rgba(79,209,139,.15)':'rgba(247,106,106,.12)'};color:${ev.status==='active'?'var(--success)':'var(--danger)'};">${ev.status==='active'?'활성':'비활성'}</span>
+          <button onclick="toggleEventStatus('${d.id}','${ev.status}')" style="font-size:10px;padding:3px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;">${ev.status==='active'?'끄기':'켜기'}</button>
+          <button onclick="deleteEvent('${d.id}')" style="font-size:10px;padding:3px 8px;border-radius:6px;border:1px solid var(--danger);background:rgba(247,106,106,.1);color:var(--danger);cursor:pointer;">삭제</button>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:4px;">${ev.desc}</div>
+      <div style="font-size:11px;color:var(--text3);padding:7px 10px;background:var(--bg3);border-radius:6px;">📋 ${ev.how}</div>`;
+    list.appendChild(card);
+  });
+}
+
+window.toggleEventStatus = async function(id, cur){
+  await updateDoc(doc(db,'events',id),{status: cur==='active'?'inactive':'active'});
+  loadEventList();
+};
+window.deleteEvent = async function(id){
+  if(!confirm('이벤트를 삭제할까요?')) return;
+  const {deleteDoc} = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+  await deleteDoc(doc(db,'events',id));
+  loadEventList(); toast('삭제됨');
+};
+
+// populate selects when admin panel shown
+const origRefreshProfile = window.refreshProfile || function(){};
+
+
+// ══════════════════════════════════════════
+// ── ADVANCED FEATURES ──
+// ══════════════════════════════════════════
+
+// ── STATE ──
+let replyTo = null;          // {id, text, name}
+let ctxMsgData = null;       // current context menu message
+let ctxMsgId = null;
+let isRecording = false;
+let mediaRec = null;
+let recChunks = [];
+let recTimerIv = null;
+let recSec = 0;
+let typingTimeout = null;
+let roomMembers = [];        // for mention
+let editingMsgId = null;
+
+const STICKER_CATS = [
+  {
+    id:'face', label:'😀 표정', stickers:[
+      '😀','😁','😂','🤣','😃','😄','😅','😆','😉','😊',
+      '😋','😎','🥹','😍','🥰','😘','🤩','🥳','😏','😒',
+      '😞','😔','😟','😕','🙁','☹️','😣','😖','😫','😩',
+      '🥺','😢','😭','😤','😠','😡','🤬','🤯','😳','🥵',
+      '🥶','😱','😨','😰','😓','🤗','🫠','🤔','🤭','😶',
+      '😐','😑','🙄','😬','😮','😲','🤐','🥱','😴','😪'
+    ]
+  },
+  {
+    id:'hands', label:'👋 손/몸', stickers:[
+      '👋','🤚','🖐','✋','🖖','🫱','🫲','🫳','🫴','👌',
+      '🤌','🤏','✌️','🤞','🫰','🤟','🤘','🤙','👈','👉',
+      '👆','🖕','👇','☝️','🫵','👍','👎','✊','👊','🤛',
+      '🤜','👏','🫶','🙌','👐','🤲','🤝','🙏','💪','🦾',
+      '🦵','🦶','👂','🦻','👃','🧠','🫀','🫁','🦷','👀'
+    ]
+  },
+  {
+    id:'animals', label:'🐱 동물', stickers:[
+      '🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯',
+      '🦁','🐮','🐷','🐸','🐵','🙈','🙉','🙊','🐔','🐧',
+      '🐦','🦆','🦅','🦉','🦇','🐺','🐗','🦄','🐝','🦋',
+      '🐛','🐌','🐞','🐜','🦟','🦗','🕷','🦂','🐢','🐍',
+      '🦎','🦕','🦖','🦑','🦈','🐳','🐋','🐬','🦭','🐟'
+    ]
+  },
+  {
+    id:'food', label:'🍕 음식', stickers:[
+      '🍎','🍊','🍋','🍇','🍓','🫐','🍒','🍑','🥭','🍍',
+      '🥥','🍆','🥑','🥦','🌽','🥕','🧅','🥔','🍠','🫘',
+      '🍞','🥐','🥨','🧀','🥚','🍳','🧇','🥞','🧈','🍗',
+      '🍔','🍟','🌭','🌮','🌯','🫔','🍕','🫕','🍝','🍜',
+      '🍣','🍱','🍛','🍚','🍙','🍘','🍥','🧁','🎂','🍰'
+    ]
+  },
+  {
+    id:'sports', label:'⚽ 스포츠', stickers:[
+      '⚽','🏀','🏈','⚾','🥎','🎾','🏐','🏉','🥏','🎱',
+      '🏓','🏸','🏒','🥊','🥋','🎯','⛳','🎣','🤿','🎿',
+      '🛷','🥌','🛹','🛼','🛺','🏋️','🤸','🤺','🤼','🤾',
+      '⛹️','🧗','🏇','🚵','🚴','🏊','🤽','🚣','🧘','🪂'
+    ]
+  },
+  {
+    id:'chess', label:'♟ 체스/보드게임', stickers:[
+      '♟','♔','♕','♖','♗','♘','♙','♚','♛','♜',
+      '♝','♞','🎮','🕹','🎲','🃏','🀄','🎰','🎳','🎯',
+      '🧩','🎭','🎪','🎨','🖼','🎬','🎤','🎧','🎵','🎶',
+      '🎹','🎸','🎺','🎻','🥁','🪘','🎷','🪗','🪕','🎼'
+    ]
+  },
+  {
+    id:'japan', label:'🗾 일본 문화', stickers:[
+      '⛩','🗾','🗻','🌸','🌺','🎋','🎍','🎎','🎏','🎐',
+      '🎑','🧧','🎌','🏯','🗼','🌊','🍣','🍱','🍜','🍙',
+      '🍚','🍘','🍥','🥮','🍡','🍢','🍧','🍦','🍛','🥟',
+      '🎎','👘','🥷','⚔️','🛡','🪆','🎴','🀄','🎭','🎪',
+      '🐉','🦊','🐈','🐟','🌙','🌸','🍁','❄️','🌊','🔮'
+    ]
+  },
+  {
+    id:'korea', label:'🇰🇷 한국 문화', stickers:[
+      '🇰🇷','🏵','🎎','🥢','🍚','🥘','🍲','🥗','🫕','🍖',
+      '🐯','🌸','🎋','🎍','🏯','⛩','🌊','🎐','🎑','🎌',
+      '🩺','📚','✏️','🎓','🏆','🥇','🎵','🎶','💃','🕺',
+      '🎤','🎧','📱','💻','🚄','🛣','🌃','🌆','🌉','🎇'
+    ]
+  },
+  {
+    id:'nature', label:'🌿 자연', stickers:[
+      '🌸','🌺','🌻','🌹','🌷','🌼','💐','🍀','🌿','☘️',
+      '🍃','🍂','🍁','🌾','🌵','🌴','🌳','🌲','🪵','🪨',
+      '🌙','⭐','🌟','💫','✨','☀️','🌤','⛅','🌥','☁️',
+      '🌦','🌧','⛈','🌩','🌨','❄️','☃️','⛄','🌬','💨',
+      '🌊','🌈','🌫','🌀','🌑','🌒','🌓','🌔','🌕','🌖'
+    ]
+  },
+  {
+    id:'travel', label:'✈️ 여행', stickers:[
+      '✈️','🚀','🛸','🚁','🛩','🚂','🚃','🚄','🚅','🚆',
+      '🚇','🚈','🚉','🚊','🚞','🚝','🚋','🚌','🚍','🚎',
+      '🚐','🚑','🚒','🚓','🚔','🚕','🚖','🚗','🚘','🚙',
+      '🏍','🛵','🚲','🛴','🛹','🛺','⛵','🚤','🛥','🛳',
+      '⛴','🚢','🏝','🏖','🏕','⛺','🌋','🗺','🗽','🗼'
+    ]
+  },
+  {
+    id:'love', label:'❤️ 사랑', stickers:[
+      '❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💕',
+      '💞','💓','💗','💖','💘','💝','💟','❣️','💔','❤️‍🔥',
+      '❤️‍🩹','💋','👄','💏','💑','🥰','😍','😘','🫦','🫶',
+      '💐','🌹','🌷','💒','💍','🎁','🎀','🎊','🎉','🥂'
+    ]
+  },
+  {
+    id:'meme', label:'😤 밈/반응', stickers:[
+      '💀','☠️','👻','🤡','💩','🤣','😭','😤','🗿','🫡',
+      '🫠','🥴','🤌','💅','🙃','😮‍💨','🤦','🤷','🤝','👀',
+      '🫣','🫢','🫨','😶‍🌫️','🤥','🫥','😐','🙄','😑','😬',
+      '🫤','🤨','🧐','😤','😒','🙁','😞','😟','😣','😖'
+    ]
+  },
+];
+
+// ── STICKER PANEL ──
+let curStickerCat = 0;
+function buildStickerPanel(){
+  const p = $('sticker-panel'); if(!p) return;
+  const cat = STICKER_CATS[curStickerCat];
+  const tabs = STICKER_CATS.map((c,i)=>
+    `<button onclick="setStickerCat(${i})" style="padding:4px 8px;border-radius:8px;border:none;font-size:12px;cursor:pointer;white-space:nowrap;background:${i===curStickerCat?'var(--accent)':'var(--bg3)'};color:${i===curStickerCat?'#fff':'var(--text2)'}">${c.label}</button>`
+  ).join('');
+  const stickers = cat.stickers.map(s=>
+    `<button class="sticker-btn" onclick="sendSticker('${s}')">${s}</button>`
+  ).join('');
+  p.innerHTML = `
+    <div style="display:flex;gap:5px;overflow-x:auto;padding-bottom:7px;margin-bottom:7px;border-bottom:1px solid var(--border);">${tabs}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;max-height:120px;overflow-y:auto;">${stickers}</div>`;
+}
+window.setStickerCat = function(i){
+  curStickerCat=i; buildStickerPanel();
+};
+window.toggleStickerPanel = function(){
+  const p = $('sticker-panel');
+  p.classList.toggle('show');
+  if(p.classList.contains('show')) buildStickerPanel();
+};
+window.sendSticker = async function(emoji){
+  if(!curChatId) return;
+  $('sticker-panel').classList.remove('show');
+  const col = curChatType==='room' ? `rooms/${curChatId}/messages` : `dms/${curChatId}/messages`;
+  await addDoc(collection(db,col),{
+    text:'', uid:CU.uid, name:CUD.name, photoURL:CUD.photoURL||'',
+    imageURL:'', sticker:emoji, createdAt:serverTimestamp(),
+    replyTo:null, reactions:{}, readBy:[CU.uid]
+  });
+  await updateDoc(doc(db,curChatType==='room'?'rooms':'dms',curChatId),{lastMsg:`${emoji} 스티커`});
+};
+
+// ── REPLY ──
+function setReply(msgId, name, text){
+  replyTo = {id:msgId, name, text};
+  $('reply-preview').classList.add('show');
+  $('reply-preview-text').textContent = `${name}: ${text||'(이미지)'}`;
+  $('msg-inp').focus();
+}
+window.clearReply = function(){
+  replyTo = null;
+  $('reply-preview').classList.remove('show');
+};
+
+// ── VOICE RECORDING ──
+window.toggleRecording = async function(){
+  if(!isRecording){
+    try{
+      const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+      mediaRec = new MediaRecorder(stream);
+      recChunks = [];
+      mediaRec.ondataavailable = e => recChunks.push(e.data);
+      mediaRec.onstop = async () => {
+        const blob = new Blob(recChunks,{type:'audio/webm'});
+        stream.getTracks().forEach(t=>t.stop());
+        await uploadVoiceMsg(blob, recSec);
+      };
+      mediaRec.start();
+      isRecording = true;
+      $('rec-btn').classList.add('recording');
+      $('rec-timer').classList.add('show');
+      recSec = 0;
+      recTimerIv = setInterval(()=>{
+        recSec++;
+        const m=Math.floor(recSec/60), s=recSec%60;
+        $('rec-timer').textContent=`${m}:${String(s).padStart(2,'0')}`;
+        if(recSec>=120){toggleRecording();}
+      },1000);
+    }catch(e){toast('마이크 권한 필요');}
+  } else {
+    if(mediaRec && mediaRec.state!=='inactive') mediaRec.stop();
+    isRecording = false;
+    $('rec-btn').classList.remove('recording');
+    $('rec-timer').classList.remove('show');
+    clearInterval(recTimerIv);
+  }
+};
+
+async function uploadVoiceMsg(blob, dur){
+  if(!curChatId) return;
+  setUBar(5);
+  const path = `voice-msgs/${curChatId}/${Date.now()}.webm`;
+  const r = sref(storage, path);
+  const task = uploadBytesResumable(r, blob);
+  const url = await new Promise((res,rej)=>{
+    task.on('state_changed', s=>setUBar(5+85*(s.bytesTransferred/s.totalBytes)), rej,
+      async()=>{ res(await getDownloadURL(task.snapshot.ref)); setUBar(100); });
+  });
+  const col = curChatType==='room'?`rooms/${curChatId}/messages`:`dms/${curChatId}/messages`;
+  await addDoc(collection(db,col),{
+    text:'', uid:CU.uid, name:CUD.name, photoURL:CUD.photoURL||'',
+    imageURL:'', voiceURL:url, voiceDur:dur,
+    sticker:'', replyTo:null, reactions:{}, readBy:[CU.uid],
+    createdAt:serverTimestamp()
+  });
+  await updateDoc(doc(db,curChatType==='room'?'rooms':'dms',curChatId),{lastMsg:'🎤 음성 메시지'});
+}
+
+// ── TYPING INDICATOR ──
+let typingRef = null;
+window.handleTyping = function(){
+  if(!curChatId||!CU) return;
+  typingRef = doc(db,`${curChatType==='room'?'rooms':'dms'}/${curChatId}/typing/${CU.uid}`);
+  setDoc(typingRef,{name:CUD.name, at:serverTimestamp()}).catch(()=>{});
+  clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(()=>{
+    if(typingRef) deleteTyping();
+  },2500);
+};
+async function deleteTyping(){
+  if(!typingRef) return;
+  try{
+    const {deleteDoc:dd}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+    await dd(typingRef);
+  }catch(e){}
+}
+let typingUnsub = null;
+function listenTyping(){
+  if(typingUnsub){typingUnsub();typingUnsub=null;}
+  if(!curChatId) return;
+  const col = collection(db,`${curChatType==='room'?'rooms':'dms'}/${curChatId}/typing`);
+  typingUnsub = onSnapshot(col, snap=>{
+    const others = [];
+    snap.forEach(d=>{ if(d.id!==CU.uid) others.push(d.data().name); });
+    const ind = $('typing-ind'), tn = $('typing-name');
+    if(others.length>0){
+      tn.textContent = others.join(', ')+'님이 입력 중...';
+      ind.classList.add('show');
+    } else {
+      ind.classList.remove('show');
+    }
+  });
+}
+
+// ── MENTION ──
+window.handleMention = function(el){
+  const val = el.value;
+  const cursor = el.selectionStart;
+  const before = val.slice(0,cursor);
+  const match = before.match(/@(\w*)$/);
+  if(match && curChatType==='room'){
+    const q2 = match[1].toLowerCase();
+    const filtered = roomMembers.filter(m=>m.name.toLowerCase().includes(q2)||( m.userId||'').toLowerCase().includes(q2));
+    renderMentionPopup(filtered, match[1]);
+  } else {
+    $('mention-popup').classList.remove('show');
+  }
+};
+function renderMentionPopup(members, q){
+  const pop = $('mention-popup');
+  if(!members.length){pop.classList.remove('show');return;}
+  pop.innerHTML = members.slice(0,6).map(m=>{
+    const col = aCol(m.name);
+    return `<div class="mention-item" onclick="insertMention('${m.userId||m.name}')">
+      <div class="mention-av" style="background:${col}20;color:${col}">${inits(m.name)}</div>
+      <div><div class="mention-name">${m.name}</div><div class="mention-id">@${m.userId||''}</div></div>
+    </div>`;
+  }).join('');
+  pop.classList.add('show');
+}
+window.insertMention = function(userId){
+  const inp = $('msg-inp');
+  const val = inp.value;
+  const cursor = inp.selectionStart;
+  const before = val.slice(0,cursor).replace(/@\w*$/,'');
+  const after = val.slice(cursor);
+  inp.value = before + '@'+userId+' ' + after;
+  inp.focus();
+  $('mention-popup').classList.remove('show');
+};
+
+// ── CONTEXT MENU ──
+let ctxTarget = null;
+function showCtxMenu(e, msgId, msgData, isOwn){
+  e.preventDefault(); e.stopPropagation();
+  ctxMsgId = msgId; ctxMsgData = msgData;
+  const menu = $('ctx-menu');
+  $('ctx-edit-btn').style.display = isOwn && msgData.text ? '' : 'none';
+  $('ctx-del-btn').style.display = isOwn ? '' : 'none';
+  menu.classList.add('show');
+  // position
+  const x = Math.min(e.clientX, window.innerWidth-170);
+  const y = Math.min(e.clientY, window.innerHeight-200);
+  menu.style.left = x+'px'; menu.style.top = y+'px';
+}
+document.addEventListener('click', e=>{
+  if(!e.target.closest('.ctx-menu')) $('ctx-menu').classList.remove('show');
+  if(!e.target.closest('.reaction-picker')&&!e.target.closest('.ctx-item')) $('reaction-picker').style.display='none';
+});
+window.ctxReply = function(){
+  $('ctx-menu').classList.remove('show');
+  if(!ctxMsgData) return;
+  setReply(ctxMsgId, ctxMsgData.name, ctxMsgData.text);
+};
+window.ctxReact = function(){
+  const menu = $('ctx-menu'); const rp = $('reaction-picker');
+  const rect = menu.getBoundingClientRect();
+  rp.style.left = rect.left+'px'; rp.style.top = (rect.top-60)+'px';
+  rp.style.display='flex'; menu.classList.remove('show');
+};
+window.ctxEdit = function(){
+  $('ctx-menu').classList.remove('show');
+  if(!ctxMsgData||!ctxMsgData.text) return;
+  editingMsgId = ctxMsgId;
+  $('edit-msg-inp').value = ctxMsgData.text;
+  openModal('m-edit-msg');
+};
+window.confirmEdit = async function(){
+  if(!editingMsgId||!curChatId) return;
+  const newText = $('edit-msg-inp').value.trim();
+  if(!newText) return;
+  const col = curChatType==='room'?`rooms/${curChatId}/messages`:`dms/${curChatId}/messages`;
+  await updateDoc(doc(db,col,editingMsgId),{text:newText, edited:true});
+  closeModal('m-edit-msg'); editingMsgId=null; toast('수정됨');
+};
+window.ctxDelete = async function(){
+  $('ctx-menu').classList.remove('show');
+  if(!ctxMsgId||!curChatId) return;
+  const col = curChatType==='room'?`rooms/${curChatId}/messages`:`dms/${curChatId}/messages`;
+  await updateDoc(doc(db,col,ctxMsgId),{text:'삭제된 메시지', imageURL:'', voiceURL:'', sticker:'', deleted:true});
+  toast('삭제됨');
+};
+window.ctxCopy = function(){
+  $('ctx-menu').classList.remove('show');
+  if(ctxMsgData?.text) navigator.clipboard.writeText(ctxMsgData.text);
+  toast('복사됨');
+};
+
+// ── REACTIONS ──
+window.pickReaction = async function(emoji){
+  $('reaction-picker').style.display='none';
+  if(!ctxMsgId||!curChatId) return;
+  const col = curChatType==='room'?`rooms/${curChatId}/messages`:`dms/${curChatId}/messages`;
+  const msgSnap = await getDoc(doc(db,col,ctxMsgId));
+  if(!msgSnap.exists()) return;
+  const reactions = msgSnap.data().reactions||{};
+  const users = reactions[emoji]||[];
+  if(users.includes(CU.uid)){
+    reactions[emoji]=users.filter(u=>u!==CU.uid);
+    if(!reactions[emoji].length) delete reactions[emoji];
+  } else {
+    reactions[emoji]=[...(users),CU.uid];
+  }
+  await updateDoc(doc(db,col,ctxMsgId),{reactions});
+};
+
+// ── NOTICE ──
+let noticeUnsub2 = null;
+function listenNotice(){
+  if(noticeUnsub2){noticeUnsub2();noticeUnsub2=null;}
+  if(curChatType!=='room'||!curChatId){$('notice-banner').style.display='none';return;}
+  noticeUnsub2 = onSnapshot(doc(db,'rooms',curChatId),snap=>{
+    const d=snap.data();
+    if(d&&d.notice){
+      $('notice-text').textContent=d.notice;
+      $('notice-banner').style.display='';
+    } else {
+      $('notice-banner').style.display='none';
+    }
+  });
+}
+window.openNoticeModal = function(){
+  const isAdmin = CUD&&(CUD.tier==='00'||CUD.tier==='09');
+  if(isAdmin) openModal('m-notice');
+  else toast('관리자만 공지를 등록할 수 있어요');
+};
+window.postNotice = async function(){
+  const text = $('notice-inp').value.trim();
+  if(!text||!curChatId){closeModal('m-notice');return;}
+  await updateDoc(doc(db,'rooms',curChatId),{notice:text});
+  closeModal('m-notice'); toast('공지 등록!');
+};
+
+// ── READ RECEIPT ──
+async function markRead(msgId){
+  if(!curChatId||!CU) return;
+  const col = curChatType==='room'?`rooms/${curChatId}/messages`:`dms/${curChatId}/messages`;
+  try{
+    await updateDoc(doc(db,col,msgId),{readBy:arrayUnion(CU.uid)});
+  }catch(e){}
+}
+
+// ── LOAD ROOM MEMBERS for mention ──
+async function loadRoomMembers(){
+  if(curChatType!=='room'||!curChatId){roomMembers=[];return;}
+  const rs=await getDoc(doc(db,'rooms',curChatId));
+  if(!rs.exists()){roomMembers=[];return;}
+  const mids=rs.data().members||[];
+  roomMembers=[];
+  for(const mid of mids){
+    if(mid===CU.uid) continue;
+    const us=await getDoc(doc(db,'users',mid));
+    if(us.exists()) roomMembers.push(us.data());
+  }
+}
+
+// ── VOICE PLAY ──
+window.playVoice = function(url, btnId){
+  const btn = document.getElementById(btnId);
+  const audio = new Audio(url);
+  audio.play();
+  if(btn) btn.innerHTML='<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+  audio.onended = ()=>{
+    if(btn) btn.innerHTML='<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+  };
+};
 
 // ── MODALS ──
 window.openModal=id=>document.getElementById(id).classList.add('open');
 window.closeModal=id=>document.getElementById(id).classList.remove('open');
 document.querySelectorAll('.moverlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 </script>
+
+<!-- Phone Change Modal -->
+<div class="moverlay" id="m-chnum">
+  <div class="modal"><div class="mhandle"></div><div class="mtitle">전화번호 변경</div>
+    <div style="background:var(--bg3);border-radius:9px;padding:12px 14px;margin-bottom:14px;">
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px;">현재 번호</div>
+      <div id="cur-num-display" style="font-family:'DM Mono',monospace;font-size:16px;color:var(--accent2);">—</div>
+    </div>
+    <div class="mf">
+      <label>새 끝 4자리</label>
+      <input type="text" id="new-numend" maxlength="4" placeholder="예: 5678" oninput="this.value=this.value.replace(/\D/g,'');updateNumChangePreview()">
+      <div class="hint">중간 5자리는 자동으로 배정됩니다</div>
+    </div>
+    <div style="background:var(--bg3);border-radius:9px;padding:10px 14px;margin-bottom:4px;font-family:'DM Mono',monospace;font-size:13px;color:var(--text2);">
+      새 번호: <span id="new-num-preview" style="color:var(--accent2);">+?? XXXXX-????</span>
+    </div>
+    <div class="mactions">
+      <button class="mbtn sec" onclick="closeModal('m-chnum')">취소</button>
+      <button class="mbtn pri" onclick="changePhoneNum()">변경</button>
+    </div>
+    <div class="merr" id="chnum-err"></div>
+    <div class="mok" id="chnum-ok"></div>
+  </div>
+</div>
+
+<!-- CONTEXT MENU -->
+<div class="ctx-menu" id="ctx-menu">
+  <div class="ctx-item" onclick="ctxReply()"><svg viewBox="0 0 24 24"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 00-4-4H4"/></svg>답장</div>
+  <div class="ctx-item" onclick="ctxReact()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>리액션</div>
+  <div class="ctx-item" id="ctx-edit-btn" onclick="ctxEdit()"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>수정</div>
+  <div class="ctx-item danger" id="ctx-del-btn" onclick="ctxDelete()"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>삭제</div>
+  <div class="ctx-item" onclick="ctxCopy()"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>복사</div>
+</div>
+
+<!-- REACTION PICKER -->
+<div class="reaction-picker" id="reaction-picker" style="display:none;position:fixed;z-index:210;">
+  <span onclick="pickReaction('👍')">👍</span>
+  <span onclick="pickReaction('❤️')">❤️</span>
+  <span onclick="pickReaction('😂')">😂</span>
+  <span onclick="pickReaction('😮')">😮</span>
+  <span onclick="pickReaction('😢')">😢</span>
+  <span onclick="pickReaction('🔥')">🔥</span>
+  <span onclick="pickReaction('✅')">✅</span>
+  <span onclick="pickReaction('🎉')">🎉</span>
+</div>
+
+<!-- NOTICE MODAL -->
+<div class="moverlay" id="m-notice">
+  <div class="modal"><div class="mhandle"></div>
+    <div class="mtitle">📢 공지 등록</div>
+    <div class="mf"><label>공지 내용</label><textarea id="notice-inp" placeholder="공지 내용 입력..." style="width:100%;padding:10px 13px;background:var(--bg3);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:13px;outline:none;resize:none;min-height:80px;"></textarea></div>
+    <div class="mactions"><button class="mbtn sec" onclick="closeModal('m-notice')">취소</button><button class="mbtn pri" onclick="postNotice()">등록</button></div>
+  </div>
+</div>
+
+<!-- EDIT MESSAGE MODAL -->
+<div class="moverlay" id="m-edit-msg">
+  <div class="modal"><div class="mhandle"></div>
+    <div class="mtitle">메시지 수정</div>
+    <div class="mf"><textarea id="edit-msg-inp" style="width:100%;padding:10px 13px;background:var(--bg3);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:13px;outline:none;resize:none;min-height:70px;"></textarea></div>
+    <div class="mactions"><button class="mbtn sec" onclick="closeModal('m-edit-msg')">취소</button><button class="mbtn pri" onclick="confirmEdit()">수정</button></div>
+  </div>
+</div>
 </body>
 </html>
