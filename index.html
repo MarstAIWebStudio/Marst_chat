@@ -405,9 +405,102 @@ button{cursor:pointer;}
 
 /* ── INP AREA IMPROVED ── */
 .inp-toolbar{display:flex;align-items:center;gap:6px;padding:6px 11px 0;}
+
+/* ── SPLASH ── */
+#splash{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .5s,transform .5s;}
+#splash.hide{opacity:0;transform:scale(1.05);pointer-events:none;}
+.splash-logo{font-size:42px;font-weight:700;letter-spacing:-.5px;}
+.splash-logo em{color:var(--accent2);font-style:normal;}
+.splash-tagline{font-size:14px;color:var(--text3);}
+.splash-spinner{width:36px;height:36px;border:3px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-top:8px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── EMOJI PICKER ── */
+.emoji-picker{position:fixed;bottom:130px;left:10px;right:10px;max-width:420px;margin:0 auto;background:var(--bg2);border:1.5px solid var(--border2);border-radius:16px;z-index:200;display:none;flex-direction:column;box-shadow:0 -4px 24px rgba(0,0,0,.4);max-height:300px;}
+.emoji-picker.show{display:flex;}
+.ep-search{padding:10px 12px;border-bottom:1px solid var(--border);}
+.ep-search input{width:100%;padding:7px 11px;background:var(--bg3);border:1.5px solid var(--border);border-radius:20px;color:var(--text);font-size:13px;outline:none;}
+.ep-tabs{display:flex;overflow-x:auto;padding:6px 8px 0;gap:4px;border-bottom:1px solid var(--border);}
+.ep-tabs::-webkit-scrollbar{display:none;}
+.ep-tab{padding:4px 8px;border-radius:8px;border:none;background:transparent;font-size:18px;cursor:pointer;transition:background .12s;flex-shrink:0;}
+.ep-tab.on{background:var(--bg4);}
+.ep-grid{display:flex;flex-wrap:wrap;padding:8px;gap:2px;overflow-y:auto;max-height:180px;}
+.ep-emoji{font-size:22px;cursor:pointer;padding:4px;border-radius:8px;border:none;background:none;transition:transform .1s,background .1s;}
+.ep-emoji:hover{background:var(--bg3);transform:scale(1.2);}
+
+/* ── STORY ── */
+.story-row{display:flex;gap:12px;padding:12px 15px 4px;overflow-x:auto;}
+.story-row::-webkit-scrollbar{display:none;}
+.story-item{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;flex-shrink:0;}
+.story-av{width:56px;height:56px;border-radius:50%;border:2.5px solid var(--accent);padding:2px;background:var(--bg);position:relative;overflow:hidden;}
+.story-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+.story-av-txt{width:100%;height:100%;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;}
+.story-av.seen{border-color:var(--border2);}
+.story-name{font-size:10px;color:var(--text2);max-width:60px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.story-add{border:2.5px dashed var(--border2);}
+.story-add-icon{width:100%;height:100%;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--accent2);}
+.story-viewer{position:fixed;inset:0;background:#000;z-index:500;display:none;flex-direction:column;}
+.story-viewer.open{display:flex;}
+.story-progress{display:flex;gap:3px;padding:12px 12px 8px;}
+.story-prog-bar{flex:1;height:3px;background:rgba(255,255,255,.3);border-radius:2px;overflow:hidden;}
+.story-prog-fill{height:100%;background:#fff;border-radius:2px;transition:width linear;}
+.story-hdr{display:flex;align-items:center;gap:10px;padding:0 12px 12px;}
+.story-hdr-av{width:36px;height:36px;border-radius:50%;overflow:hidden;border:2px solid #fff;}
+.story-hdr-name{font-size:13px;font-weight:600;color:#fff;flex:1;}
+.story-hdr-time{font-size:11px;color:rgba(255,255,255,.6);}
+.story-close{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;}
+.story-content{flex:1;display:flex;align-items:center;justify-content:center;position:relative;}
+.story-text-content{font-size:22px;font-weight:600;color:#fff;text-align:center;padding:20px;max-width:90%;}
+.story-nav-left{position:absolute;left:0;top:0;bottom:0;width:40%;cursor:pointer;}
+.story-nav-right{position:absolute;right:0;top:0;bottom:0;width:40%;cursor:pointer;}
+.story-reply-area{padding:12px;display:flex;gap:8px;}
+.story-reply-inp{flex:1;padding:9px 13px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:20px;color:#fff;font-size:13px;outline:none;}
+.story-reply-inp::placeholder{color:rgba(255,255,255,.5);}
+.story-send-btn{width:38px;height:38px;border-radius:50%;background:var(--accent);border:none;color:#fff;display:flex;align-items:center;justify-content:center;}
+
+/* ── QR CODE ── */
+.qr-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:10px 0;}
+.qr-canvas{border-radius:12px;background:#fff;padding:12px;}
+.qr-code-txt{font-family:'DM Mono',monospace;font-size:18px;letter-spacing:.1em;color:var(--accent2);text-align:center;}
+
+/* ── PROFILE BG ── */
+.prof-top{position:relative;overflow:hidden;}
+.prof-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--accent),var(--accent2));opacity:.15;z-index:0;}
+.prof-bg img{width:100%;height:100%;object-fit:cover;opacity:.2;}
+.prof-top>*:not(.prof-bg){position:relative;z-index:1;}
+.prof-av-wrap{position:relative;}
+.online-ring{width:84px;height:84px;border-radius:50%;border:3px solid var(--success);padding:3px;background:var(--bg);}
+.online-ring.offline{border-color:var(--border2);}
+.last-seen{font-size:10px;color:var(--text3);margin-top:2px;}
+
+/* ── LINK PREVIEW ── */
+.link-preview{background:var(--bg4);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-top:5px;cursor:pointer;display:flex;gap:10px;align-items:flex-start;}
+.lp-img{width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--bg3);}
+.lp-info{flex:1;min-width:0;}
+.lp-title{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lp-url{font-size:10px;color:var(--text3);margin-top:2px;}
+
+/* ── PIN ── */
+.pin-banner{background:var(--bg3);border-bottom:1px solid var(--border);padding:7px 14px;display:none;align-items:center;gap:8px;cursor:pointer;}
+.pin-banner.show{display:flex;}
+.pin-icon{font-size:14px;}
+.pin-txt{flex:1;font-size:12px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* ── FORWARD ── */
+.forward-list{max-height:50vh;overflow-y:auto;}
+.forward-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .12s;}
+.forward-item:hover{background:var(--bg3);}
+.forward-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.forward-check.on{background:var(--accent);border-color:var(--accent);color:#fff;font-size:12px;}
 </style>
 </head>
 <body>
+
+<div id="splash">
+  <div class="splash-logo">Marst<em>Chat</em></div>
+  <div class="splash-tagline">실시간 채팅 플랫폼</div>
+  <div class="splash-spinner"></div>
+</div>
 <div class="ubar" id="ubar"></div>
 <div id="toast"></div>
 
@@ -485,7 +578,8 @@ button{cursor:pointer;}
         </div>
       </div>
       <div class="scroll">
-        <div class="home-hero">
+        <div class="story-row" id="story-row"></div>
+<div class="home-hero">
           <div class="home-greet">안녕하세요, <em id="home-uname">—</em> 👋</div>
           <div class="home-hint">오늘도 대화를 시작해보세요</div>
         </div>
@@ -668,7 +762,8 @@ button{cursor:pointer;}
 
         <div class="sset">
           <div class="scard">
-            <div class="srow" onclick="doLogout()">
+            <div class="srow" onclick="openModal('m-profbg')"><div class="srow-ic" style="background:rgba(236,72,153,.12);color:#ec4899"><svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="srow-t"><div class="srow-l">프로필 배경</div></div><div class="srow-arr"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div></div>
+<div class="srow" onclick="doLogout()">
               <div class="srow-ic" style="background:rgba(247,106,106,.12);color:var(--danger)"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg></div>
               <div class="srow-t"><div class="srow-l" style="color:var(--danger)">로그아웃</div></div>
             </div>
@@ -712,7 +807,8 @@ button{cursor:pointer;}
       <button class="ibtn" id="cd-voice-btn" onclick="startCall('voice')" title="음성통화"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></button>
       <button class="ibtn" id="cd-video-btn" onclick="startCall('video')" title="영상통화"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></button>
       <button class="ibtn" id="cd-notice-btn" onclick="openNoticeModal()" style="display:none" title="공지"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></button>
-      <button class="ibtn" id="cd-invite-btn" onclick="showInviteCode()"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></button>
+      <button class="ibtn" id="cd-qr-btn" onclick="showQR()" title="QR 초대"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M17 20h3M20 17v3"/></svg></button>
+<button class="ibtn" id="cd-invite-btn" onclick="showInviteCode()"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></button>
     </div>
   </div>
   <!-- NOTICE BANNER -->
@@ -2330,7 +2426,9 @@ document.querySelectorAll('.moverlay').forEach(o=>o.addEventListener('click',e=>
   <div class="ctx-item" onclick="ctxReact()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>리액션</div>
   <div class="ctx-item" id="ctx-edit-btn" onclick="ctxEdit()"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>수정</div>
   <div class="ctx-item danger" id="ctx-del-btn" onclick="ctxDelete()"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>삭제</div>
-  <div class="ctx-item" onclick="ctxCopy()"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>복사</div>
+  <div class="ctx-item" onclick="ctxForward()"><svg viewBox="0 0 24 24"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 014-4h12"/></svg>전달</div>
+<div class="ctx-item" onclick="ctxPin()"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>핀 고정</div>
+<div class="ctx-item" onclick="ctxCopy()"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>복사</div>
 </div>
 
 <!-- REACTION PICKER -->
