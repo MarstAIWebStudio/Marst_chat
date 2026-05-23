@@ -1359,15 +1359,16 @@ window.adminSave=async function(uid){
 window.openChat=function(id,type,name,inviteCode){
   if(msgUnsub)msgUnsub();
   curChatId=id;curChatType=type;curInvite=inviteCode;
-  $('cd-title').textContent=name;
-  $('cd-sub').textContent=type==='room'?`초대 코드: ${inviteCode}`:'Direct Message';
-  $('cd-invite-btn').style.display=type==='room'?'':'none';
-  $('cd-notice-btn').style.display=type==='room'?'':'none';
-  if(inviteCode)$('invite-code').textContent=inviteCode;
-  $('msgs').innerHTML='';
-  $('chat-detail').classList.add('open');
-  removeAttach(); clearReply();
-  $('sticker-panel').classList.remove('show');
+  const cdTitle=$('cd-title'),cdSub=$('cd-sub'),cdInvite=$('cd-invite-btn'),cdNotice=$('cd-notice-btn');
+  if(cdTitle)cdTitle.textContent=name;
+  if(cdSub)cdSub.textContent=type==='room'?`초대 코드: ${inviteCode}`:'Direct Message';
+  if(cdInvite)cdInvite.style.display=type==='room'?'':'none';
+  if(cdNotice)cdNotice.style.display=type==='room'?'':'none';
+  const invEl=$('invite-code');if(inviteCode&&invEl)invEl.textContent=inviteCode;
+  const msgs=$('msgs');if(msgs)msgs.innerHTML='';
+  const cd=$('chat-detail');if(cd)cd.classList.add('open');
+  replyTo=null;const rp=$('reply-prev');if(rp)rp.classList.remove('show');
+  const sp=$('sticker-panel');if(sp)sp.classList.remove('show');
   listenForNewMsgs(id,type,name,inviteCode);
   listenTyping();
   listenNotice();
@@ -1392,12 +1393,14 @@ window.openChat=function(id,type,name,inviteCode){
   });
 };
 window.closeDetail=function(){
-  $('chat-detail').classList.remove('open');
+  const cd=$('chat-detail');if(cd)cd.classList.remove('open');
   if(msgUnsub){msgUnsub();msgUnsub=null;}
   if(typingUnsub){typingUnsub();typingUnsub=null;}
   if(noticeUnsub2){noticeUnsub2();noticeUnsub2=null;}
   deleteTyping();
-  curChatId=null;removeAttach();clearReply();
+  curChatId=null;
+  replyTo=null;const rp=$('reply-prev');if(rp)rp.classList.remove('show');
+  const sp2=$('sticker-panel');if(sp2)sp2.classList.remove('show');
 };
 
 async function renderMsg(c, m, msgId){
@@ -1532,7 +1535,7 @@ window.sendMsg=async function(){
   await addDoc(collection(db,col),msgData);
   await updateDoc(doc(db,curChatType==='room'?'rooms':'dms',curChatId),{lastMsg:imageURL?'📷 이미지':text});
   clearReply();
-  $('sticker-panel').classList.remove('show');
+  const _sp=$('sticker-panel');if(_sp)_sp.classList.remove('show');
 };
 window.handleKey=function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}};
 window.autoResize=function(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,95)+'px';};
